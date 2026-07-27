@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — GreenGold | Go Green, Go Bold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380;0,9..144,600;0,9..144,680;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#00A2B1;
+    --teal-deep:#00707D;
+    --teal-tint:#E6F5F6;
+    --gold:#EFBF04;
+    --gold-deep:#B98F00;
+    --gold-tint:#FDF3D2;
+    --ink:#16211F;
+    --cream:#FBF7EE;
+    --sand:#F3EAD3;
+    --charcoal:#20211D;
+    --graphite:#5C5B52;
+    --line: rgba(32,33,29,0.12);
+    --teal-glow: rgba(0,162,177,0.28);
+    --gold-glow: rgba(239,191,4,0.32);
+    --shadow-card: 0 22px 44px -26px rgba(22,33,31,0.22);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  img{ display:block; max-width:100%; }
+  svg{ display:block; }
+  ::selection{ background:var(--teal); color:var(--cream); }
+
+  .wrap{ max-width:1280px; margin:0 auto; padding:0 56px; }
+  section{ position:relative; }
+  .section-pad{ padding:110px 0; }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; color:var(--charcoal); }
+  em{ font-style:italic; font-weight:400; color:var(--teal-deep); }
+
+  .eyebrow{
+    font-size:12px; font-weight:600;
+    letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--teal-deep);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{ content:''; width:8px; height:8px; border-radius:50%; background:var(--gold); display:inline-block; flex-shrink:0; }
+
+  .section-head{ max-width:60ch; margin-bottom:52px; }
+  .section-title{ font-size:clamp(30px,3.4vw,48px); line-height:1.12; }
+  .section-desc{ font-size:16px; line-height:1.7; color:var(--graphite); margin-top:16px; max-width:62ch; }
+
+  .bg-tint{ background:var(--teal-tint); }
+  .bg-sand{ background:var(--sand); }
+
+  .btn{
+    position:relative; display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    text-decoration:none; padding:15px 30px; border-radius:40px;
+    transition:transform .25s ease, background .3s ease, color .3s ease, box-shadow .3s ease;
+    border:none; cursor:pointer;
+  }
+  .btn-solid{ background:var(--teal); color:#fff; box-shadow:0 10px 24px -10px rgba(0,162,177,0.55); }
+  .btn-solid:hover{ background:var(--teal-deep); transform:translateY(-2px); }
+  .btn-outline{ background:transparent; color:var(--charcoal); border:1.5px solid var(--charcoal); }
+  .btn-outline:hover{ border-color:var(--teal); color:var(--teal-deep); transform:translateY(-2px); }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity .85s cubic-bezier(.22,.61,.36,1), transform .85s cubic-bezier(.22,.61,.36,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .stagger .reveal:nth-child(1){ transition-delay:.02s; }
+  .stagger .reveal:nth-child(2){ transition-delay:.09s; }
+  .stagger .reveal:nth-child(3){ transition-delay:.16s; }
+  .stagger .reveal:nth-child(4){ transition-delay:.23s; }
+  .stagger .reveal:nth-child(5){ transition-delay:.30s; }
+  .stagger .reveal:nth-child(6){ transition-delay:.37s; }
+  .stagger .reveal:nth-child(7){ transition-delay:.44s; }
+  .stagger .reveal:nth-child(8){ transition-delay:.51s; }
+
+  /* ---------- word-by-word title reveal ---------- */
+  .split-title .word{ display:inline-block; opacity:0; transform:translateY(16px) rotate(1deg); transition:opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1); }
+  .split-title.in .word{ opacity:1; transform:translateY(0) rotate(0deg); }
+
+  /* ---------- image zoom-in on scroll ---------- */
+  .zoom-wrap{ overflow:hidden; border-radius:28px; }
+  .zoom-in{ transform:scale(1.1); transition:transform 1.3s cubic-bezier(.22,.61,.36,1); }
+  .zoom-wrap.in .zoom-in{ transform:scale(1); }
+
+  /* ---------- floating leaves ---------- */
+  .float-leaf{ position:absolute; color:var(--teal); opacity:.4; pointer-events:none; animation:leafDrift 8s ease-in-out infinite; z-index:2; }
+  .float-leaf.gold{ color:var(--gold); }
+  .float-leaf.slow{ animation-duration:11s; }
+  @keyframes leafDrift{ 0%,100%{ transform:translateY(0) rotate(-6deg); } 50%{ transform:translateY(-20px) rotate(10deg); } }
+
+  /* ---------- icon pulse ---------- */
+  .icon-pulse{ animation:pulseRing 2.6s ease-in-out infinite; }
+  @keyframes pulseRing{ 0%,100%{ box-shadow:0 0 0 0 var(--teal-glow); } 50%{ box-shadow:0 0 0 10px rgba(0,162,177,0); } }
+
+  /* ---------- progress line draw ---------- */
+  .draw-line{ position:relative; }
+  .draw-line .line-fill{ position:absolute; top:0; left:0; height:100%; width:0%; background:var(--gold); transition:width 1.3s cubic-bezier(.22,.61,.36,1) .2s; }
+  .draw-line.in .line-fill{ width:100%; }
+
+  /* ---------- continuous ambient motion ---------- */
+  .illus-float{ animation:illusBob 5.5s ease-in-out infinite; transform-origin:center; }
+  @keyframes illusBob{ 0%,100%{ transform:translateY(0) rotate(0deg); } 50%{ transform:translateY(-10px) rotate(-1deg); } }
+
+  .badge-bob{ animation:badgeBob 4.5s ease-in-out infinite; }
+  @keyframes badgeBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+
+  .nav-logo .dot{ display:inline-block; animation:dotPulse 2.4s ease-in-out infinite; }
+  @keyframes dotPulse{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.35); opacity:.6; } }
+
+  .eyebrow::before{ animation:eyebrowPulse 2.2s ease-in-out infinite; }
+  @keyframes eyebrowPulse{ 0%,100%{ box-shadow:0 0 0 0 var(--gold-glow); } 50%{ box-shadow:0 0 0 6px rgba(239,191,4,0); } }
+
+  .process-arrow svg{ animation:arrowNudge 1.8s ease-in-out infinite; }
+  @keyframes arrowNudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(5px); } }
+
+  .value-timeline::before{ background-size:16px 1px; animation:dashFlow 1.6s linear infinite; }
+  @keyframes dashFlow{ from{ background-position:0 0; } to{ background-position:32px 0; } }
+
+  .tilt-card{ will-change:transform; transition:transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease !important; }
+
+  .count-wrap{ display:inline-flex; align-items:baseline; gap:2px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+  }
+
+  /* icon circles (utility icons) */
+  .icon-circle{ width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center; background:var(--teal-tint); color:var(--teal-deep); flex-shrink:0; }
+  .icon-circle.gold{ background:var(--gold-tint); color:var(--gold-deep); }
+  .icon-circle.dark{ background:rgba(251,247,238,0.12); color:var(--gold); }
+  .icon-circle svg{ width:24px; height:24px; }
+ .icon-circle.lg{ width:44px; height:44px; border-radius:14px; }
+.icon-circle.lg svg{ width:20px; height:20px; }
+  .icon-circle.round{ border-radius:50%; }
+
+  /* signature illustration panel */
+  .visual-panel{
+    position:relative; border-radius:30px; overflow:hidden;
+    background:radial-gradient(120% 120% at 20% 10%, #EAF4EA 0%, #DCEEE0 45%, #CFE7DA 100%);
+    min-height:440px; display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-card);
+  }
+.visual-panel.dark-bg{ background:transparent; box-shadow:none; }
+  .visual-panel .illus{ width:78%; max-width:340px; }
+  .visual-panel::after{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(400px 220px at 85% 90%, rgba(239,191,4,0.14), transparent 70%);
+    pointer-events:none;
+  }
+  .floating-badge{
+    position:absolute; z-index:3; background:var(--ink); color:#fff;
+    border-radius:18px; padding:18px 22px; box-shadow:0 20px 40px -18px rgba(0,0,0,0.4);
+    display:flex; flex-direction:column; align-items:flex-start; gap:6px; max-width:200px;
+  }
+  .floating-badge .fb-icon{ width:34px; height:34px; border-radius:10px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:var(--gold); margin-bottom:2px; }
+  .floating-badge .fb-icon svg{ width:18px; height:18px; }
+  .floating-badge h5{ font-family:'Fraunces', serif; font-size:14px; font-weight:600; }
+  .floating-badge p{ font-size:11.5px; line-height:1.5; color:rgba(255,255,255,0.65); }
+  .floating-badge.light{ background:#fff; color:var(--charcoal); }
+  .floating-badge.light p{ color:var(--graphite); }
+  .floating-badge.light .fb-icon{ background:var(--teal-tint); color:var(--teal-deep); }
+  .floating-badge.top-right{ top:22px; right:-14px; }
+  .floating-badge.bottom-left{ bottom:22px; left:-14px; }
+
+  /* =====================================================  NAV  ===================================================== */
+  .site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px; background:rgba(251,247,238,0.92); backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line);
+    transition:padding .4s ease, background .4s ease, box-shadow .4s ease;
+  }
+  .site-nav.is-scrolled{ padding:16px 56px; }
+  .nav-logo{ display:flex; align-items:center; gap:8px; font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:var(--charcoal); }
+  .nav-logo .dot{ color:var(--gold); }
+  .nav-logo em{ color:var(--teal); font-style:italic; font-weight:400; }
+  .nav-links{ display:flex; align-items:center; gap:36px; list-style:none; }
+  .nav-links a{ font-size:13px; font-weight:500; color:var(--charcoal); text-decoration:none; position:relative; padding-bottom:4px; }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--gold); transition:width .3s ease; }
+  .nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+  .nav-links a.active{ color:var(--teal-deep); }
+  .nav-right{ display:flex; align-items:center; gap:24px; }
+  .nav-cta{ font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; color:#fff; background:var(--charcoal); text-decoration:none; padding:11px 22px; border-radius:30px; transition:background .3s ease, transform .3s ease; white-space:nowrap; }
+  .nav-cta:hover{ background:var(--teal-deep); transform:translateY(-2px); }
+
+  @media (max-width:980px){
+    .nav-links{ display:none; }
+    .site-nav{ padding:20px 24px; }
+    .site-nav.is-scrolled{ padding:14px 24px; }
+  }
+
+  /* =====================================================  PAGE HEADER  ===================================================== */
+  .page-header{ padding:180px 56px 90px; text-align:center; position:relative; overflow:hidden; }
+  .page-header::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(600px 300px at 15% 0%, rgba(0,162,177,0.10), transparent 70%),
+               radial-gradient(600px 300px at 85% 10%, rgba(239,191,4,0.10), transparent 70%);
+    pointer-events:none;
+  }
+  .page-header .eyebrow{ justify-content:center; }
+  .page-header h1{ font-size:clamp(36px,5vw,62px); line-height:1.08; max-width:20ch; margin:0 auto; }
+  .page-header p{ font-size:17px; line-height:1.7; color:var(--graphite); max-width:60ch; margin:22px auto 0; }
+  .header-marks{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:34px; position:relative; z-index:1; }
+  .header-marks span{ font-size:12px; font-weight:600; color:var(--teal-deep); background:#fff; border:1px solid var(--line); padding:8px 16px; border-radius:20px; transition:transform .3s ease, box-shadow .3s ease; }
+  .header-marks span:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card); }
+
+  @media (max-width:980px){ .page-header{ padding:150px 24px 60px; } }
+
+  /* =====================================================  ABOUT COMPANY SPLIT  ===================================================== */
+  .about-split{ display:grid; grid-template-columns:1fr 0.95fr; gap:64px; align-items:center; }
+  .about-copy p{ font-size:15.5px; line-height:1.8; color:var(--graphite); margin-bottom:18px; }
+  .benefit-list{ list-style:none; margin-top:8px; display:flex; flex-direction:column; gap:16px; }
+  .benefit-list li{ display:flex; gap:14px; align-items:flex-start; font-size:14.5px; line-height:1.65; color:var(--graphite); }
+  .benefit-list .b-dot{
+    flex-shrink:0; width:34px; height:34px; border-radius:11px;
+    background:var(--teal-tint); color:var(--teal-deep);
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px; transition:transform .3s ease, background .3s ease, color .3s ease;
+  }
+  .benefit-list .b-dot svg{ width:16px; height:16px; }
+  .benefit-list li:hover .b-dot{ background:var(--teal); color:#fff; transform:scale(1.1) rotate(-6deg); }
+  .benefit-list b{ color:var(--charcoal); font-weight:600; }
+
+  @media (max-width:980px){ .about-split{ grid-template-columns:1fr; } .floating-badge{ position:static; margin-top:14px; max-width:none; } }
+
+  /* =====================================================  STAT ROW UNDER VISUAL  ===================================================== */
+  .about-stat-row{ display:flex; gap:26px; margin-top:34px; flex-wrap:wrap; }
+  .about-stat-row div{ flex:1 1 100px; }
+  .about-stat-row .num{ font-family:'Fraunces', serif; font-size:26px; color:var(--teal-deep); }
+  .about-stat-row .lbl{ font-size:11.5px; color:var(--graphite); margin-top:4px; }
+
+  /* =====================================================  OUR VALUE  ===================================================== */
+.value-section-bg{
+    position:relative;
+    background:
+      radial-gradient(ellipse 800px 400px at 20% 10%, rgba(0,162,177,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 400px at 85% 20%, rgba(239,191,4,0.08), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 50% 100%, rgba(62,142,82,0.10), transparent 60%),
+      var(--cream);
+    border-radius:40px;
+    padding:70px 40px;
+  }
+
+  .value-timeline{ position:relative; display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+  .value-timeline::before{
+    content:''; position:absolute; top:26px; left:6%; right:6%; height:1px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
+    z-index:0;
+  }
+  .value-card{
+    position:relative; z-index:1; background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:20px 16px 18px; text-align:left; overflow:hidden;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, background .4s ease;
+  }
+  .value-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-card); }
+  .value-card.highlight{ background:linear-gradient(165deg,#0C2724,#173F3A); color:#fff; transform:translateY(-14px); }
+  .value-card.highlight p{ color:rgba(251,247,238,0.72); }
+ .value-card:hover{
+  background:linear-gradient(165deg,#0C2724,#173F3A);
+  color:#fff;
+}
+.value-card:hover h4{ color:#fff; }
+.value-card:hover p{ color:rgba(251,247,238,0.72); }
+.value-card:hover .v-badge{
+  background:rgba(255,255,255,0.15);
+  color:var(--gold);
+}
+.value-card:hover .v-num{
+  color:var(--gold);
+  border-top-color:rgba(251,247,238,0.14);
+}
+
+.value-card .v-photo{
+  width:100%; height:140px; border-radius:12px; overflow:hidden;
+  position:relative; margin-bottom:16px; background:var(--sand);
+}
+.value-card .v-photo img{
+  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
+  text-indent:-9999px;
+  visibility:hidden;
+}
+.value-card .v-photo img[src]:not([src=""]){
+  visibility:visible;
+}
+.value-card .v-badge{
+  position:absolute; top:10px; left:10px; z-index:2;
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(12,39,36,0.85); color:var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.value-card .v-badge svg{ width:16px; height:16px; }
+.value-card.highlight .v-photo{ margin-bottom:14px; }
+  .value-card.highlight .v-icon{ background:rgba(255,255,255,0.1); color:var(--gold); }
+.value-card .v-icon svg{ width:16px; height:16px; min-width:16px; min-height:16px; max-width:16px; max-height:16px; display:block; }
+.value-card h4{ font-family:'Fraunces', serif; font-size:14px; font-weight:600; margin-bottom:6px; }  
+.value-card.highlight h4{ color:#fff; }
+.value-card p{ font-size:11.5px; line-height:1.5; color:var(--graphite); } 
+.value-card .v-num{ display:block; margin-top:12px; font-family:'Fraunces', serif; font-size:12px; color:var(--gold-deep); border-top:1px solid var(--line); padding-top:8px; }
+.value-card.highlight .v-num{ color:var(--gold); border-top-color:rgba(251,247,238,0.14); }
+
+  @media (max-width:980px){ .value-timeline{ grid-template-columns:repeat(2,1fr); } .value-timeline::before{ display:none; }
+   .value-card.highlight{ transform:none; } .value-card.highlight:hover{ transform:translateY(-8px); } }
+  @media (max-width:560px){ .value-timeline{ grid-template-columns:1fr; } }
+
+  /* =====================================================  VISION / MISSION SPLIT  ===================================================== */
+.vm-panel{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:0;
+  box-shadow:var(--shadow-card);
+  position:relative;
+  overflow:visible;
+}
+.vm-side{ padding:64px 52px; position:relative; overflow:hidden; }
+
+.vm-side.light{
+  border-radius:48px 0 0 48px;
+  position:relative;
+  background:
+    linear-gradient(180deg,
+      var(--cream) 0%,
+      var(--cream) 42%,
+      rgba(251,247,238,0.75) 55%,
+      rgba(251,247,238,0.15) 70%,
+      rgba(251,247,238,0) 85%
+    ),
+    url('Assets/ChatGPT Image Jul 26, 2026, 11_55_52 AM.png');
+  background-size:100% 100%, cover;
+  background-position:center, center;
+  background-repeat:no-repeat;
+  color:var(--charcoal);
+  padding-left:76px;
+}
+.vm-side.light .eyebrow{ color:var(--teal-deep); }
+.vm-side.light .eyebrow::before{ background:var(--gold); }
+.vm-side.light h3{ color:var(--charcoal); }
+.vm-side.light h3 em{ color:var(--teal); font-style:italic; font-weight:400; }
+.vm-side.light p{ color:var(--graphite); font-size:15px; line-height:1.8; max-width:38ch; }
+
+.vm-side.dark{
+  border-radius:0 48px 48px 0;
+  background:linear-gradient(155deg,#0C2724,#123632 60%,#0A211F);
+  color:#fff;
+}
+.vm-side .eyebrow{ margin-bottom:18px; }
+.vm-side.dark .eyebrow{ color:rgba(251,247,238,0.55); }
+.vm-side h3{ font-size:clamp(24px,2.6vw,32px); line-height:1.2; margin-bottom:18px; }
+.vm-side.dark h3{ color:#fff; }
+
+.vm-dots{ display:flex; flex-direction:column; gap:10px; position:absolute; left:22px; top:64px; }
+.vm-dots span{ width:8px; height:8px; border-radius:50%; background:rgba(0,112,125,0.22); transition:background .4s ease, transform .4s ease; }
+.vm-dots span.active{ background:var(--teal-deep); transform:scale(1.3); }
+
+.mission-list{ display:flex; flex-direction:column; gap:16px; margin-top:26px; }
+.mission-item{ display:flex; gap:16px; align-items:flex-start; background:rgba(251,247,238,0.06); border:1px solid rgba(251,247,238,0.12); border-radius:14px; padding:16px 18px; transition:transform .3s ease, background .3s ease; }
+.mission-item:hover{ transform:translateX(6px); background:rgba(251,247,238,0.1); }
+.mission-item .mi-icon{ width:38px; height:38px; border-radius:11px; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0; }
+.mission-item .mi-icon svg{ width:18px; height:18px; }
+.mission-item .mi-num{ font-family:'Fraunces', serif; font-size:13px; color:var(--gold); margin-right:2px; }
+.mission-item p{ font-size:13.5px; line-height:1.6; color:rgba(251,247,238,0.78); }
+
+.vm-badge{
+  position:absolute; left:50%; bottom:-24px; transform:translateX(-50%);
+  z-index:5; background:var(--cream); border-radius:40px;
+  padding:14px 26px; box-shadow:0 18px 36px -16px rgba(22,33,31,0.3);
+  display:flex; align-items:center; gap:10px;
+  font-size:13.5px; font-weight:600; color:var(--charcoal); white-space:nowrap;
+}
+.vm-badge svg{ width:16px; height:16px; color:var(--teal-deep); flex-shrink:0; }
+
+@media (max-width:900px){
+  .vm-panel{ grid-template-columns:1fr; }
+  .vm-side.light{ border-radius:32px 32px 0 0; padding-left:52px; }
+  .vm-side.dark{ border-radius:0 0 32px 32px; }
+  .vm-dots{ display:none; }
+  .vm-badge{ position:static; transform:none; margin:24px auto 0; width:fit-content; }
+}
+  /* =====================================================  MANUFACTURING (image 3)  ===================================================== */
+  .manu-hero{ display:grid; grid-template-columns:1fr 0.95fr; gap:64px; align-items:center; margin-bottom:64px; }
+  @media (max-width:980px){ .manu-hero{ grid-template-columns:1fr; } }
+
+.stat-strip{ display:flex; gap:14px; flex-wrap:nowrap; margin-bottom:32px; }
+.stat-card{
+  flex:1 1 0; min-width:0; background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:18px 16px; display:flex; align-items:center; gap:12px;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+  .stat-card:hover{ transform:translateY(-6px); box-shadow:0 26px 46px -26px var(--teal-glow); border-color:var(--teal); }
+  .stat-card .s-num{ font-family:'Fraunces', serif; font-size:20px; color:var(--charcoal); line-height:1; }
+.stat-card .s-lbl{ font-size:11px; color:var(--graphite); margin-top:4px; }
+  .strength-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px 30px; }
+  .strength-grid li{ list-style:none; display:flex; gap:14px; align-items:center; font-size:14.5px; color:var(--graphite); padding:16px 4px; border-bottom:1px solid var(--line); transition:padding-left .3s ease, color .3s ease; }
+ .strength-grid li{ list-style:none; display:flex; gap:10px; align-items:center; font-size:13px; color:var(--graphite); padding:10px 4px; border-bottom:1px solid var(--line); transition:padding-left .3s ease, color .3s ease; }
+.strength-grid li .st-icon{ flex-shrink:0; width:24px; height:24px; border-radius:8px; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; }
+.strength-grid li .st-icon svg{ width:12px; height:12px; }
+
+  @media (max-width:700px)
+  { .strength-grid{ grid-template-columns:1fr; } }
+
+  /* =====================================================  WHAT WE MANUFACTURE (image 2, sec1)  ===================================================== */
+  .manu2-split{ display:grid; grid-template-columns:1fr 0.9fr; gap:60px; align-items:center; }
+.manu-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:32px; }
+.manu-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 16px; display:flex; align-items:center; gap:12px;
+    transition:transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .3s ease;
+  }
+  .manu-card:hover{ transform:translateY(-4px); box-shadow:0 18px 32px -20px rgba(22,33,31,0.25); border-color:var(--line); }
+  .manu-card .m-thumb{
+  width:52px; height:52px; min-width:52px; min-height:52px; border-radius:14px;
+  background:var(--sand); display:flex; align-items:center; justify-content:center;
+  overflow:hidden; flex-shrink:0;
+}
+.manu-card .m-thumb img{
+  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
+}
+.manu-card .m-thumb img{ 
+  visibility:hidden; 
+}
+.manu-card .m-thumb.has-photo img{ 
+  visibility:visible; 
+}
+ .manu-photo-area{
+    position:relative; border-radius:28px; overflow:hidden; min-height:420px;
+    background:linear-gradient(160deg,#E6EFE6,#D9E9DE);
+    border:none; outline:none;
+  }
+  .manu-photo-area img{ 
+    width:100%; height:100%; object-fit:cover; object-position:center; display:block; 
+    border:none; outline:none;
+  }
+  .zoom-wrap{ border:none; outline:none; }
+  .zoom-wrap img{ border:none; outline:none; }
+  .manu-compostable-badge{
+    position:absolute; top:20px; right:20px; z-index:3;
+    background:#fff; border-radius:16px; padding:14px 18px;
+    box-shadow:0 16px 30px -16px rgba(22,33,31,0.3);
+    display:flex; align-items:center; gap:10px;
+    font-size:12.5px; font-weight:600; color:var(--charcoal);
+  }
+  .manu-compostable-badge .icon-circle{ margin:0; width:36px; height:36px; }
+  .manu-card:hover{ transform:translateY(-6px) scale(1.02); box-shadow:0 22px 40px -24px var(--gold-glow); border-color:var(--gold); }
+  .manu-card h4{ font-family:'Fraunces', serif; font-size:14.5px; font-weight:600; }
+  .manu-card span.sub{ display:block; font-weight:400; font-size:11.5px; color:var(--graphite); margin-top:2px; }
+  .manu-card.wide{ grid-column:span 2; }
+
+  @media (max-width:980px){ .manu2-split{ grid-template-columns:1fr; } }
+  @media (max-width:560px){ .manu-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* =====================================================  ALL PRODUCTS ARE (image 2, sec2)  ===================================================== */
+  .badge-row{ position:relative; display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+  .badge-card{
+    flex:1 1 190px; background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:30px 22px; text-align:center; transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;
+  }
+  .badge-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-card); }
+  .badge-card .icon-circle{ margin:0 auto 16px; }
+  .badge-card h4{ font-family:'Fraunces', serif; font-size:15px; font-weight:600; margin-bottom:6px; }
+  .badge-card p{ font-size:12.5px; color:var(--graphite); line-height:1.5; }
+  .badge-card .b-num{ display:block; margin-top:16px; width:26px; height:26px; line-height:26px; border-radius:50%; border:1px solid var(--line); font-size:11px; color:var(--graphite); margin-left:auto; margin-right:auto; }
+
+  .progress-track{ height:2px; background:var(--line); max-width:900px; margin:36px auto 0; position:relative; }
+
+  /* =====================================================  SUSTAINABILITY / BETTER SUBSTITUTE (image 1 top)  ===================================================== */
+  .sus-split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+ .sus-points{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+.sus-points div{
+  background:#fff; border:1px solid var(--line); border-radius:30px; padding:10px 18px 10px 10px;
+  display:flex; align-items:center; gap:10px;
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  width:auto;
+}
+.sus-points div:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card); border-color:var(--teal); }
+.sus-points .sp-lbl{ font-size:13.5px; font-weight:600; color:var(--charcoal); white-space:nowrap; }
+.sus-points .icon-circle{ width:32px; height:32px; border-radius:50%; }
+.sus-points .icon-circle svg{ width:16px; height:16px; }
+  @media (max-width:820px){ .sus-split{ grid-template-columns:1fr; } }
+
+  .fact-bar{ display:flex; flex-wrap:wrap; justify-content:center; gap:0; margin-top:70px; border-radius:20px; overflow:hidden; background:#fff; border:1px solid var(--line); }
+  .fact-bar div{ flex:1 1 200px; display:flex; align-items:center; gap:14px; padding:26px 30px; border-right:1px solid var(--line); }
+  .fact-bar div:last-child{ border-right:none; }
+  .fact-bar .fb-num{ font-family:'Fraunces', serif; font-size:22px; color:var(--teal-deep); }
+  .fact-bar .fb-lbl{ font-size:11.5px; color:var(--graphite); margin-top:2px; }
+  @media (max-width:700px){ .fact-bar div{ border-right:none; border-bottom:1px solid var(--line); } }
+
+
+.process-section-bg{
+  position:relative;
+  padding:0;
+}
+
+  /* =====================================================  BAGASSE PROCESS (image 1 bottom)  ===================================================== */
+  
+  
+  .process-flow{ display:flex; align-items:flex-start; justify-content:center; flex-wrap:wrap; gap:0; position:relative; }
+  .process-step{ display:flex; flex-direction:column; align-items:center; text-align:center; width:150px; position:relative; }
+  .process-step .p-icon{
+    width:100px; height:100px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center; color:var(--teal-deep); margin-bottom:14px;
+    border:2px solid var(--teal); box-shadow:0 14px 26px -16px rgba(0,112,125,0.3);
+    transition:transform .4s cubic-bezier(.22,.61,.36,1), background .4s ease, color .4s ease;
+    position:relative;
+  }
+  .process-step .p-icon svg{ width:34px; height:34px; }
+  .process-step .p-num{
+    font-family:'Fraunces', serif; font-size:30px; font-weight:700; color:var(--gold-deep);
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .3s ease;
+  }
+  .process-step:hover .p-icon{ transform:translateY(-6px) scale(1.06); background:var(--teal-deep); }
+  .process-step:hover .p-icon svg{ opacity:0; }
+  .process-step:hover .p-num{ opacity:1; }
+  .process-step .p-lbl{ font-size:14px; font-weight:600; color:var(--charcoal); line-height:1.4; margin-bottom:4px; margin-top:14px; }
+  .process-step .p-sub{ font-size:11.5px; color:var(--graphite); line-height:1.4; max-width:150px; margin:0 auto; }
+  .process-arrow{ color:var(--gold); margin:24px 4px 0; flex-shrink:0; }
+  .process-arrow svg{ width:22px; height:22px; }
+  @media (max-width:900px){ .process-arrow{ transform:rotate(90deg); margin:6px 0; } .process-flow{ flex-direction:column; } }
+
+  .process-cta{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    margin-top:56px; background:var(--ink); color:#fff; border-radius:40px;
+    padding:20px 30px; text-align:center; font-size:14px; font-weight:600;
+  }
+  .process-cta svg{ width:18px; height:18px; color:var(--gold); flex-shrink:0; }
+
+  /* =====================================================  EXPORT COUNTRIES  ===================================================== */
+  .country-row{ display:flex; justify-content:center; gap:34px; flex-wrap:wrap; margin-top:44px; }
+  .country-card{ display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .35s ease; }
+  .country-card:hover{ transform:translateY(-8px); }
+  .country-flag{
+    width:68px; height:68px; border-radius:50%; background:#fff; border:2px solid var(--teal);
+    display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;
+    box-shadow:0 14px 26px -16px rgba(0,162,177,0.35); transition:box-shadow .35s ease, border-color .35s ease;
+  }
+  .country-card:hover .country-flag{ border-color:var(--gold); box-shadow:0 20px 34px -16px var(--gold-glow); }
+  .country-flag img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; border-radius:50%; }
+  .country-card span{ font-size:12.5px; font-weight:600; color:var(--charcoal); }
+
+  /* =====================================================  CTA BANNER  ===================================================== */
+  .brochure-banner{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:80px 24px; background:var(--ink); position:relative; overflow:hidden;
+  }
+  .brochure-banner::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(500px 260px at 12% 0%, rgba(0,162,177,0.16), transparent 70%),
+               radial-gradient(500px 260px at 88% 100%, rgba(239,191,4,0.14), transparent 70%);
+  }
+  .brochure-banner .eyebrow{ color:rgba(251,247,238,0.6); justify-content:center; position:relative; }
+  .brochure-banner .eyebrow::before{ background:var(--gold); }
+  .brochure-banner h2{
+    font-family:'Fraunces', serif; font-weight:600; color:#fff; position:relative;
+    font-size:clamp(28px, 4vw, 50px); max-width:18ch;
+  }
+  .brochure-banner h2 em{ font-style:italic; font-weight:400; color:var(--teal); }
+  .brochure-banner p{
+    font-size:16px; color:rgba(251,247,238,0.75); max-width:46ch; position:relative;
+    margin:20px 0 40px; line-height:1.7;
+  }
+  .btn-light{ background:var(--cream); color:var(--ink); border:1px solid var(--cream); }
+  .btn-light:hover{ background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+  .cta-actions{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; position:relative; }
+
+  /* =====================================================  FOOTER  ===================================================== */
+  footer{ background:var(--ink); color:rgba(251,247,238,0.72); padding:80px 0 26px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:44px; padding-bottom:56px; border-bottom:1px solid rgba(251,247,238,0.12); }
+  .footer-logo{ font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:#fff; }
+  .footer-logo em{ font-style:italic; color:var(--teal); font-weight:400; }
+  .footer-logo .dot{ color:var(--gold); }
+  .footer-tagline{ font-size:13px; color:rgba(251,247,238,0.55); margin-top:14px; max-width:28ch; line-height:1.6; }
+  .footer-col h4{ font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(251,247,238,0.45); margin-bottom:18px; }
+  .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:11px; }
+  .footer-col a{ font-size:14px; color:rgba(251,247,238,0.8); text-decoration:none; }
+  .footer-col a:hover{ color:var(--gold); }
+  .footer-col address{ font-style:normal; font-size:14px; line-height:1.8; color:rgba(251,247,238,0.72); }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; padding-top:24px; font-size:12px; color:rgba(251,247,238,0.4); }
+  .footer-marks{ display:flex; gap:16px; flex-wrap:wrap; }
+  .footer-marks span{ padding:5px 12px; border:1px solid rgba(251,247,238,0.18); border-radius:20px; }
+
+  @media (max-width:900px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } }
+  @media (max-width:560px){ .footer-grid{ grid-template-columns:1fr; } .section-pad{ padding:70px 0; } }
+
+  /* =====================================================  WHATSAPP  ===================================================== */
+  .whatsapp-float{
+    position:fixed; right:26px; bottom:26px; z-index:90;
+    display:flex; align-items:center; gap:10px;
+    background:#1EBE5D; color:#fff; text-decoration:none;
+    padding:14px 18px; border-radius:30px;
+    box-shadow:0 16px 30px -12px rgba(30,190,93,0.55);
+    font-size:13px; font-weight:600;
+    animation:floatBob 3.2s ease-in-out infinite;
+  }
+  .whatsapp-float svg{ width:22px; height:22px; }
+  @keyframes floatBob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+  @media (max-width:560px){ .whatsapp-float span{ display:none; } .whatsapp-float{ padding:14px; } }
+
+  @media (max-width:980px){ .wrap{ padding:0 24px; } }
+</style>
+</head>
+<body>
+
+<!-- reusable icon defs (referenced via <use>) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="ic-leaf"><path d="M4 20c8 0 14-6 14-14 0-1 0-2-.3-3C10 3 4 9 4 17c0 1 0 2 .3 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 20c4-6 8-9 14-13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-recycle"><path d="M7 10 4.5 14.3 8 16.3M4.5 14.3h6.2M16.9 6.3 20 9.7l-3.6 1.6M20 9.7h-6.7M13.5 17.7 17 15.7l-2 -3.5M17 15.7h-6.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-cloud"><path d="M7 16.5a4 4 0 0 1 .3-8 5 5 0 0 1 9.6 1.4A3.6 3.6 0 0 1 16.5 17H7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 19.5 11.3 17M13.3 19.5l1.3-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-ban"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 6.5l11 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-shield"><path d="M12 3.5 19 6v6c0 5-3 7.7-7 8.5-4-.8-7-3.5-7-8.5V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-factory"><path d="M3 20V11l4 2.5V11l4 2.5V11l4 2.5V6h3v14z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 16h2M11 16h2M16 16h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-users"><circle cx="9" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c.6-3.2 3-5 5.5-5s4.9 1.8 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15 6.3a3 3 0 0 1 0 5.9M17 19c-.3-2-1.2-3.6-2.7-4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-building"><rect x="5" y="4" width="14" height="16" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.3 8h1.6M14 8h1.6M8.3 11.6h1.6M14 11.6h1.6M8.3 15.2h1.6M14 15.2h1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-robot"><rect x="4" y="7" width="9" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 7V4.5M13 10l6-2.5M13 13l6 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="7" cy="11" r=".9" fill="currentColor"/><circle cx="10" cy="11" r=".9" fill="currentColor"/></g>
+    <g id="ic-flask"><path d="M10 3.5h4M10.5 3.5v5.3L6 17a1.6 1.6 0 0 0 1.4 2.4h9.2A1.6 1.6 0 0 0 18 17l-4.5-8.2V3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.3 15h7.4" stroke="currentColor" stroke-width="1.6"/></g>
+    <g id="ic-box"><path d="M3.5 8 12 4l8.5 4-8.5 4-8.5-4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3.5 8v8l8.5 4 8.5-4V8M12 12v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-truck"><path d="M3 7h9v9H3zM12 10.5h4l3 3V16h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="17.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+    <g id="ic-bulb"><path d="M9 18.5h6M9.8 21h4.4M8 15.3A5 5 0 1 1 16 15.3c-.9 1-1.5 1.6-1.5 3.2h-5c0-1.6-.6-2.2-1.5-3.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-medal"><circle cx="12" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 3.5 8 9.7l3 1.6M14.5 3.5 16 9.7l-3 1.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 11.5v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-handshake"><path d="M3 11.5 6.5 8l3 2.2M21 11.5 17.5 8l-3 2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 10.2 12 12.5l1.7-1.5c.9-.8 2.3-.7 3 .2.6.8.5 2-.3 2.7l-3.6 3.2a2.4 2.4 0 0 1-3.1 0L6.5 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-globe"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 4c2.4 2.2 3.6 5 3.6 8s-1.2 5.8-3.6 8c-2.4-2.2-3.6-5-3.6-8s1.2-5.8 3.6-8z" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+    <g id="ic-target"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1" fill="currentColor"/></g>
+    <g id="ic-microwave"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="6" y="8" width="8" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="10" r="1" fill="currentColor"/><path d="M15.5 13.5h3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-snow"><path d="M12 3v18M4.5 7.5l15 9M19.5 7.5l-15 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+    <g id="ic-drop"><path d="M12 3.5c3 4 6 7.8 6 11.2a6 6 0 0 1-12 0c0-3.4 3-7.2 6-11.2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-sprout"><path d="M12 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 13c0-3.5-2.5-6-6.5-6C5.5 11 8 13 12 13zM12 10c0-3 2-5.5 6-5.5C18 8 15.5 10 12 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g id="ic-sugarcane"><path d="M9 21V9.5M9 9.5c0-3 1.5-5 4-6.5M9 12.5c2-1 3.5-2.7 3.5-5M9 16.5c2.3-.6 4-2.2 4.5-4.5M6 21h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="ic-arrow"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+    <!-- signature illustration: bagasse tableware set -->
+    <g id="illus-tableware">
+      <ellipse cx="95" cy="205" rx="72" ry="10" fill="#0A211F" opacity=".08"/>
+      <circle cx="90" cy="150" r="66" fill="#EFE6D0"/>
+      <circle cx="90" cy="150" r="66" fill="none" stroke="#D8C99E" stroke-width="2"/>
+      <circle cx="90" cy="150" r="44" fill="none" stroke="#D8C99E" stroke-width="1.6"/>
+      <ellipse cx="210" cy="95" rx="46" ry="44" fill="#E4EFE1"/>
+      <path d="M172 108c0-18 17-32 38-32s38 14 38 32" fill="none" stroke="#00707D" stroke-width="2"/>
+      <ellipse cx="210" cy="108" rx="38" ry="10" fill="#00A2B1" opacity=".18"/>
+      <rect x="52" y="30" width="34" height="52" rx="8" fill="#FDF3D2"/>
+      <rect x="52" y="30" width="34" height="52" rx="8" fill="none" stroke="#B98F00" stroke-width="2"/>
+      <path d="M20 210c10-40 5-90 30-130" stroke="#3E8E52" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M18 190c10-3 16-10 18-20" stroke="#3E8E52" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M26 150c9-1 15-6 18-15" stroke="#3E8E52" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- signature illustration: facility -->
+    <g id="illus-factory">
+      <rect x="20" y="90" width="220" height="90" rx="6" fill="#12332F"/>
+      <rect x="20" y="70" width="220" height="24" rx="4" fill="#0C2724"/>
+      <rect x="34" y="40" width="60" height="30" fill="none" stroke="#EFBF04" stroke-width="2" opacity=".6"/>
+      <rect x="104" y="40" width="60" height="30" fill="none" stroke="#EFBF04" stroke-width="2" opacity=".6"/>
+      <rect x="174" y="40" width="60" height="30" fill="none" stroke="#EFBF04" stroke-width="2" opacity=".6"/>
+      <rect x="46" y="120" width="26" height="40" fill="#0A211F"/>
+      <rect x="86" y="120" width="26" height="40" fill="#0A211F"/>
+      <rect x="126" y="120" width="26" height="40" fill="#0A211F"/>
+      <rect x="166" y="120" width="26" height="40" fill="#0A211F"/>
+      <rect x="0" y="180" width="260" height="10" fill="#0A211F" opacity=".5"/>
+      <circle cx="230" cy="30" r="16" fill="#EFBF04" opacity=".85"/>
+    </g>
+  </defs>
+</svg>
+
+<nav class="site-nav" id="siteNav">
+  <div class="nav-logo">green<span class="dot">•</span><em>gold</em></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products-green_gold.html">Products</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="manufacturing.html">Manufacturing</a></li>
+  <!--  <li><a href="export.html">Export</a></li> -->
+    <li><a href="faq.html">FAQ</a></li>
+     <li><a href="updatedexport.html">Export</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="index.html#export" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-header">
+  <svg class="float-leaf" style="top:60px; left:8%;" width="24" height="24" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <svg class="float-leaf gold slow" style="top:110px; right:12%;" width="20" height="20" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <svg class="float-leaf slow" style="bottom:20px; left:20%;" width="18" height="18" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <div class="wrap" style="padding:0;">
+    <div class="eyebrow reveal">
+      <svg width="14" height="14" viewBox="0 0 24 24" style="color:var(--teal-deep)"><use href="#ic-leaf"/></svg>
+      Sustainable by Nature
+    </div>
+    <h1 class="split-title">Sustainable dining, rooted in purpose</h1>
+    <p class="reveal">GreenGold is the tableware brand of SNG Eco India Pvt Ltd — manufacturing 100% compostable sugarcane bagasse products that let businesses serve beautifully without costing the planet.</p>
+    <div class="header-marks stagger">
+      <span class="reveal">100% Compostable</span><span class="reveal">Food-Grade &amp; Toxin-Free</span><span class="reveal">150 Tons Capacity</span><span class="reveal">90,000 Sq. Mtr. Facility</span><span class="reveal">Export Ready</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOUT OUR COMPANY ============ -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="about-split">
+      <div class="about-copy reveal">
+        <h2 class="section-title split-title" style="margin-bottom:22px;">Welcome to the future of <em>sustainable dining</em></h2>
+        <p>At GreenGold, we are proud to offer an innovative range of eco-friendly tableware crafted from sugarcane bagasse — a genuinely environmentally conscious alternative to traditional plastic and paper-based tableware.</p>
+
+        <ul class="benefit-list">
+          <li><span class="b-dot"><svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg></span><span><b>Eco-Friendly</b> — Our tableware is biodegradable and compostable, breaking down naturally without harming the environment.</span></li>
+          <li><span class="b-dot"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg></span><span><b>Durable &amp; Sturdy</b> — Designed to withstand both hot and cold foods, our tableware is microwave and freezer safe, providing convenience without compromising on quality.</span></li>
+          <li><span class="b-dot"><svg viewBox="0 0 24 24"><use href="#ic-ban"/></svg></span><span><b>Chemical-Free</b> — Free from harmful chemicals and toxins, our products are safe for both you and the environment.</span></li>
+          <li><span class="b-dot"><svg viewBox="0 0 24 24"><use href="#ic-box"/></svg></span><span><b>Versatile &amp; Stylish</b> — Available in a variety of shapes and sizes, our tableware is perfect for any occasion, from casual picnics to elegant events.</span></li>
+        </ul>
+
+        <p style="margin-top:26px;"><b style="color:var(--charcoal);">Why Choose Us?</b><br>
+        We are committed to sustainability and innovation. Our sugarcane bagasse tableware reflects our dedication to creating products that are not only functional and stylish but also environmentally responsible. Join us in our mission to reduce waste and protect our planet, one meal at a time.</p>
+      </div>
+
+      <div class="reveal" style="position:relative;">
+  <div class="zoom-wrap parallax" data-speed="0.06">
+    <div class="visual-panel zoom-in">
+      <!-- yaha svg ki jagah img -->
+<img src="Assets\images-removebg-preview (1).png" alt="GreenGold manufacturing facility, Ahmedabad" class="illus illus-float">    </div>
+  </div>
+  <div class="floating-badge top-right badge-bob">
+    <div class="fb-icon"><svg viewBox="0 0 24 24"><use href="#ic-sugarcane"/></svg></div>
+    <h5>Since Ahmedabad</h5>
+    <p>Every piece we manufacture carries a commitment to reducing single-use plastic, table by table.</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISION & MISSION ============ -->
+<section class="section-pad bg-tint">
+  <div class="wrap">
+    <div class="vm-panel reveal">
+      <div class="vm-side light">
+        <div class="vm-dots"><span class="active"></span><span></span><span></span><span></span></div>
+        <div class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" style="color:var(--teal-deep)"><use href="#ic-leaf"/></svg>Our Vision</div>
+        <h3>A Greener Future, <em>Shared by All.</em></h3>
+        <p>To become a leading global brand in sustainable tableware by promoting environmentally responsible choices and reducing single-use plastic waste.</p>
+      </div>
+      <div class="vm-side dark">
+        <div class="eyebrow"><svg width="12" height="12" viewBox="0 0 24 24" style="color:var(--gold)"><use href="#ic-target"/></svg>Our Mission</div>
+        <h3>Purposeful Today, <span style="color:var(--teal)">Sustainable Tomorrow.</span></h3>
+        <div class="mission-list stagger">
+          <div class="mission-item reveal"><div class="mi-icon"><svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg></div><p><span class="mi-num">01</span>To manufacture world-class, eco-friendly bagasse tableware using sustainable practices.</p></div>
+          <div class="mission-item reveal"><div class="mi-icon"><svg viewBox="0 0 24 24"><use href="#ic-globe"/></svg></div><p><span class="mi-num">02</span>To support global environmental goals by offering natural, biodegradable alternatives.</p></div>
+          <div class="mission-item reveal"><div class="mi-icon"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg></div><p><span class="mi-num">03</span>To deliver consistent product quality and exceptional customer value.</p></div>
+          <div class="mission-item reveal"><div class="mi-icon"><svg viewBox="0 0 24 24"><use href="#ic-bulb"/></svg></div><p><span class="mi-num">04</span>To innovate continuously and stay ahead in the eco-tableware industry.</p></div>
+        </div>
+      </div>
+      <div class="vm-badge">
+        <svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+        Building a better planet, one table at a time.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR VALUE ============ -->
+<!-- ============ OUR VALUE ============ -->
+<!-- ============ OUR VALUE ============ -->
+<section class="section-pad" style="position:relative;">
+  <svg class="float-leaf" style="top:40px; left:5%;" width="20" height="20" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <svg class="float-leaf gold slow" style="top:90px; right:7%;" width="18" height="18" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <div class="wrap">
+    <div class="value-section-bg">
+      <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+        <h2 class="section-title split-title">Values That Shape Everything We Do</h2>
+        <p class="section-desc" style="margin-left:auto; margin-right:auto; text-align:center;">Guided by purpose. Driven by responsibility. Committed to a better tomorrow.</p>
+      </div>
+      <div class="value-timeline stagger">
+  <div class="value-card reveal tilt-card">
+    <div class="v-photo">
+<img src="Assets\Plats.png" alt="Quality" onerror="this.style.display='none'">
+      <span class="v-badge"><svg viewBox="0 0 24 24"><use href="#ic-medal"/></svg></span>
+    </div>
+    <h4>Quality</h4>
+    <p>Ensuring every product meets strict international standards.</p>
+    <span class="v-num">01</span>
+  </div>
+
+  <div class="value-card reveal tilt-card">
+    <div class="v-photo">
+      <img src="Assets\Bowals.png" alt="Sustainability" onerror="this.style.display='none'">
+      <span class="v-badge"><svg viewBox="0 0 24 24"><use href="#ic-globe"/></svg></span>
+    </div>
+    <h4>Sustainability</h4>
+    <p>Protecting the environment through responsible manufacturing.</p>
+    <span class="v-num">02</span>
+  </div>
+
+  <div class="value-card highlight reveal tilt-card">
+    <div class="v-photo">
+      <img src="innovation.png" alt="Innovation" onerror="this.style.display='none'">
+      <span class="v-badge"><svg viewBox="0 0 24 24"><use href="#ic-bulb"/></svg></span>
+    </div>
+    <h4>Innovation</h4>
+    <p>Constantly developing modern, effective, and green solutions.</p>
+    <span class="v-num">03</span>
+  </div>
+
+  <div class="value-card reveal tilt-card">
+    <div class="v-photo">
+      <img src="customer.png" alt="Customer Commitment" onerror="this.style.display='none'">
+      <span class="v-badge"><svg viewBox="0 0 24 24"><use href="#ic-handshake"/></svg></span>
+    </div>
+    <h4>Customer Commitment</h4>
+    <p>Building long-term, transparent partnerships.</p>
+    <span class="v-num">04</span>
+  </div>
+
+  <div class="value-card reveal tilt-card">
+    <div class="v-photo">
+      <img src="integrity.png" alt="Integrity" onerror="this.style.display='none'">
+      <span class="v-badge"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg></span>
+    </div>
+    <h4>Integrity</h4>
+    <p>Honest practices at every step of the supply chain.</p>
+    <span class="v-num">05</span>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+<!-- ============ MANUFACTURING EXCELLENCE ============ -->
+<section class="section-pad bg-sand" style="position:relative;">
+  <svg class="float-leaf" style="top:50px; left:4%;" width="20" height="20" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <svg class="float-leaf gold slow" style="bottom:60px; right:5%;" width="18" height="18" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <div class="wrap">
+    <div class="manu-hero">
+      <div class="reveal">
+        <h2 class="section-title split-title">Innovation is <em>our identity</em></h2>
+        <p class="section-desc">Our production facility is equipped with advanced machinery and strict quality control systems. We follow globally accepted standards to deliver safe, hygienic, and reliable products.</p>
+      </div>
+      <div class="reveal" style="position:relative;">
+        <div class="parallax" data-speed="0.08">
+          <div class="visual-panel dark-bg no-bg">
+            <img src="Assets/aboutimg1.png" alt="GreenGold manufacturing facility" class="illus illus-float" onerror="this.style.display='none'" style="width:100%; max-width:600px; height:auto;">
+          </div>
+        </div>
+        <div class="floating-badge light bottom-left badge-bob">
+          <div class="fb-icon"><svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg></div>
+          <h5>Sustainable by Choice</h5>
+          <p>Solar-powered lines, zero-plastic commitment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-strip stagger">
+      <div class="stat-card reveal">
+        <div class="icon-circle lg"><svg viewBox="0 0 24 24"><use href="#ic-robot"/></svg></div>
+        <div><div class="s-num"><span class="count" data-target="150">0</span> Tons</div><div class="s-lbl">Production Capacity</div></div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="icon-circle lg gold"><svg viewBox="0 0 24 24"><use href="#ic-users"/></svg></div>
+        <div><div class="s-num"><span class="count" data-target="150">0</span>+</div><div class="s-lbl">Dedicated Employees</div></div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="icon-circle lg"><svg viewBox="0 0 24 24"><use href="#ic-building"/></svg></div>
+        <div><div class="s-num"><span class="count" data-target="90000" data-format="comma">0</span> Sq. Mtr.</div><div class="s-lbl">Land Area</div></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px; margin-bottom:24px;">Key Strengths Include</h3>
+    <ul class="strength-grid">
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-robot"/></svg></span>Automated Production Lines</li>
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-flask"/></svg></span>In-house Quality Testing Lab</li>
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-box"/></svg></span>Hygienic Packaging &amp; Handling</li>
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-building"/></svg></span>Bulk Production Capacity</li>
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-bulb"/></svg></span>Custom Product Development Capabilities</li>
+      <li><span class="st-icon"><svg viewBox="0 0 24 24"><use href="#ic-truck"/></svg></span>On-time Delivery for Domestic &amp; Export Markets</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHAT WE MANUFACTURE ============ -->
+<!-- ============ WHAT WE MANUFACTURE ============ -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="manu2-split">
+      <div class="reveal">
+        <div class="eyebrow">What We Manufacture</div>
+        <h2 class="section-title split-title">A complete range of <em>100% compostable</em> tableware</h2>
+        <p class="section-desc">Thoughtfully designed for a sustainable tomorrow. Made from nature, returned to nature.</p>
+        <div class="manu-grid stagger">
+ <div class="manu-card reveal tilt-card">
+  <div class="m-thumb has-photo"><img src="Assets/Plats.png" alt="Plates"></div>
+  <h4>Plates<span class="sub">Round, Square, Compartment</span></h4>
+</div>
+  <div class="manu-card reveal tilt-card">
+    <div class="m-thumb has-photo"><img src="Assets/Bowals.png" alt="Bowls"></div>
+    <h4>Bowls</h4>
+  </div>
+  <div class="manu-card reveal tilt-card">
+    <div class="m-thumb has-photo"><img src="Assets\Meal Trays.png" alt="Meal Trays"></div>
+    <h4>Meal Trays</h4>
+  </div>
+  <div class="manu-card reveal tilt-card">
+    <div class="m-thumb "><img src="thumb-containers.png" alt="Containers & Lids"></div>
+    <h4>Containers &amp; Lids</h4>
+  </div>
+  <div class="manu-card reveal tilt-card">
+    <div class="m-thumb "><img src="thumb-clamshell.png" alt="Clamshell Boxes"></div>
+    <h4>Clamshell Boxes</h4>
+  </div>
+  <div class="manu-card reveal tilt-card">
+    <div class="m-thumb "><img src="thumb-cups.png" alt="Cups"></div>
+    <h4>Cups</h4>
+  </div>
+  <div class="manu-card wide reveal tilt-card">
+    <div class="m-thumb "><img src="thumb-custom.png" alt="Customized Food-Service Products"></div>
+    <h4>Customized Food-Service Products</h4>
+  </div>
+</div>
+      </div>
+      <div class="reveal" style="position:relative;">
+        <svg class="float-leaf" style="top:-10px; right:6%;" width="22" height="22" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+        <svg class="float-leaf gold slow" style="bottom:30px; left:-6px;" width="18" height="18" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+        <div class="zoom-wrap parallax" data-speed="0.05">
+          <div class="manu-photo-area zoom-in">
+            <!-- TODO: yahan apni real product-collage photo daalna (plates, bowls, cups, sugarcane ek saath) -->
+            <img src="Assets/images-removebg-preview (1).png" alt="GreenGold bagasse tableware collection">
+          </div>
+        </div>
+        <div class="manu-compostable-badge badge-bob">
+          <div class="icon-circle gold"><svg viewBox="0 0 24 24"><use href="#ic-recycle"/></svg></div>
+          <div>100% Compostable<br><span style="font-weight:400; color:var(--graphite); font-size:11px;">Plastic Free</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALL PRODUCTS ARE ============ -->
+<section class="section-pad bg-tint" style="position:relative;">
+  <svg class="float-leaf" style="top:36px; left:6%;" width="18" height="18" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <svg class="float-leaf gold slow" style="top:70px; right:8%;" width="20" height="20" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      <h2 class="section-title split-title">All products are</h2>
+    </div>
+    <div class="badge-row stagger">
+      <div class="badge-card reveal tilt-card">
+        <div class="icon-circle icon-pulse"><svg viewBox="0 0 24 24"><use href="#ic-shield"/></svg></div>
+        <h4>Food-Grade &amp; Toxin-Free</h4><p>Safe for direct food contact, hot or cold.</p><span class="b-num">01</span>
+      </div>
+      <div class="badge-card reveal tilt-card">
+        <div class="icon-circle gold icon-pulse" style="animation-delay:.3s"><svg viewBox="0 0 24 24"><use href="#ic-microwave"/></svg></div>
+        <h4>Microwave-Safe</h4><p>Reheat straight in the container.</p><span class="b-num">02</span>
+      </div>
+      <div class="badge-card reveal tilt-card">
+        <div class="icon-circle icon-pulse" style="animation-delay:.6s"><svg viewBox="0 0 24 24"><use href="#ic-snow"/></svg></div>
+        <h4>Freezer-Safe</h4><p>Goes from freezer to microwave with ease.</p><span class="b-num">03</span>
+      </div>
+      <div class="badge-card reveal tilt-card">
+        <div class="icon-circle gold icon-pulse" style="animation-delay:.9s"><svg viewBox="0 0 24 24"><use href="#ic-drop"/></svg></div>
+        <h4>Sturdy &amp; Leak-Resistant</h4><p>Holds up to oils, gravies and hot liquids.</p><span class="b-num">04</span>
+      </div>
+      <div class="badge-card reveal tilt-card">
+        <div class="icon-circle icon-pulse" style="animation-delay:1.2s"><svg viewBox="0 0 24 24"><use href="#ic-recycle"/></svg></div>
+        <h4>Fully Compostable</h4><p>Breaks down naturally within months.</p><span class="b-num">05</span>
+      </div>
+    </div>
+    <div class="progress-track draw-line reveal"><div class="line-fill"></div></div>
+  </div>
+</section>
+
+<!-- ============ SUSTAINABILITY & EFFICIENCY / A BETTER SUBSTITUTE ============ -->
+<section class="section-pad">
+  <div class="wrap">
+    <div class="sus-split">
+      <div class="reveal">
+        <h2 class="section-title split-title">A better substitute, <em>by design</em></h2>
+        <p class="section-desc">Being a waste product of sugarcane, items made from bagasse are a relatively better sustainable substitute than conventional non-biodegradable, non-renewable disposables like plastic and styrofoam. In general, the key is to ensure they're sustainably and responsibly produced — which is exactly how we manufacture.</p>
+        <div class="sus-points stagger">
+          <div class="reveal"><div class="icon-circle"><svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg></div><span class="sp-lbl">Renewable Resource</span></div>
+          <div class="reveal"><div class="icon-circle gold"><svg viewBox="0 0 24 24"><use href="#ic-recycle"/></svg></div><span class="sp-lbl">Reduced Waste</span></div>
+          <div class="reveal"><div class="icon-circle"><svg viewBox="0 0 24 24"><use href="#ic-cloud"/></svg></div><span class="sp-lbl">Lower Carbon Footprint</span></div>
+          <div class="reveal"><div class="icon-circle gold"><svg viewBox="0 0 24 24"><use href="#ic-ban"/></svg></div><span class="sp-lbl">Compostable</span></div>
+        </div>
+      </div>
+      <div class="reveal" style="position:relative;">
+  <svg class="float-leaf" style="top:0; left:-8px;" width="20" height="20" viewBox="0 0 24 24"><use href="#ic-leaf"/></svg>
+  <div class="zoom-wrap parallax" data-speed="0.05">
+    <div class="visual-panel zoom-in">
+      <img src="Assets\images-removebg-preview (1).png" alt="GreenGold sustainable bagasse products" class="illus illus-float" onerror="this.style.display='none'" style="width:100%; max-width:600px; height:auto;">
+    </div>
+  </div>
+  <div class="floating-badge top-right badge-bob">
+    <div class="fb-icon"><svg viewBox="0 0 24 24"><use href="#ic-globe"/></svg></div>
+    <h5>Renewable by Nature</h5>
+    <p>Every piece begins as leftover sugarcane fibre — replenished every harvest, not extracted from the earth.</p>
+  </div>
+</div>
+    </div>
+<!--
+    <div class="fact-bar reveal">
+      <div><div class="icon-circle"><svg viewBox="0 0 24 24"><use href="#ic-leaf"/></svg></div><div><div class="fb-num"><span class="count" data-target="100">0</span>%</div><div class="fb-lbl">Natural &amp; Renewable</div></div></div>
+      <div><div class="icon-circle gold"><svg viewBox="0 0 24 24"><use href="#ic-ban"/></svg></div><div><div class="fb-num">0%</div><div class="fb-lbl">Plastic &amp; Toxins</div></div></div>
+      <div><div class="icon-circle"><svg viewBox="0 0 24 24"><use href="#ic-recycle"/></svg></div><div><div class="fb-num"><span class="count" data-target="100">0</span>%</div><div class="fb-lbl">Compostable</div></div></div>
+      <div><div class="icon-circle gold"><svg viewBox="0 0 24 24"><use href="#ic-globe"/></svg></div><div><div class="fb-num">Better For</div><div class="fb-lbl">People &amp; Planet</div></div></div>
+    </div>
+  </div>
+-->
+</section>
+
+<!-- ============ THE BAGASSE PROCESS ============ -->
+<section class="section-pad bg-sand">
+  <div class="wrap">
+    <div class="process-section-bg">
+      <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">Our Sustainable Journey</div>
+        <h2 class="section-title split-title">The Bagasse Process</h2>
+        <p class="section-desc" style="margin-left:auto; margin-right:auto; text-align:center;">From a field of swaying sugarcane to a sustainable dish — a natural cycle that nourishes the soil while protecting our world.</p>
+      </div>
+      <div class="process-flow reveal">
+        <div class="process-step">
+  <div class="p-icon">
+    <svg viewBox="0 0 24 24"><use href="#ic-sugarcane"/></svg>
+    <span class="p-num">01</span>
+  </div>
+  <div class="p-lbl">Sugarcane Plants</div>
+  <div class="p-sub">Grown naturally in fertile fields</div>
+</div>
+        <span class="process-arrow"><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></span>
+       <!-- 
+        <div class="process-step">
+          <span class="p-num">02</span>
+          <div class="p-icon"><svg viewBox="0 0 24 24"><use href="#ic-sprout"/></svg></div>
+          <div class="p-lbl">Bagasse Fibres</div>
+          <div class="p-sub">Leftover fibres collected after sugar extraction</div>
+        </div>
+      -->
+
+      <div class="process-step">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><use href="#ic-sprout"/></svg>
+          <span class="p-num">02</span>
+        </div>
+        <div class="p-lbl">Bagasse Fibres</div>
+        <div class="p-sub">Leftover fibres collected after sugar extraction</div>
+      </div>
+
+        <span class="process-arrow"><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></span>
+      <!--
+        <div class="process-step">
+          <span class="p-num">03</span>
+          <div class="p-icon"><svg viewBox="0 0 24 24"><use href="#ic-factory"/></svg></div>
+          <div class="p-lbl">Processing Factory</div>
+          <div class="p-sub">Fibres cleaned, refined &amp; processed with care</div>
+        </div>
+      -->
+       <div class="process-step">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><use href="#ic-factory"/></svg>
+          <span class="p-num">03</span>
+        </div>
+        <div class="p-lbl">Processing Factory</div>
+        <div class="p-sub">Fibres cleaned, refined &amp; processed with care</div>
+      </div> 
+
+        <span class="process-arrow"><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></span>
+       <!--
+        <div class="process-step">
+          <span class="p-num">04</span>
+          <div class="p-icon"><svg viewBox="0 0 24 24"><use href="#ic-box"/></svg></div>
+          <div class="p-lbl">Bagasse Sheets</div>
+          <div class="p-sub">Pressed into strong, durable sheets</div>
+        </div>
+      -->
+          <div class="process-step">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg>
+          <span class="p-num">04</span>
+        </div>
+        <div class="p-lbl">Bagasse Sheets</div>
+        <div class="p-sub">Pressed into strong, durable sheets</div>
+      </div>
+
+
+        <span class="process-arrow"><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></span>
+        <!--
+        <div class="process-step">
+          <span class="p-num">05</span>
+          <div class="p-icon"><svg viewBox="0 0 24 24"><use href="#ic-drop"/></svg></div>
+          <div class="p-lbl">Bagasse Pulp Product</div>
+          <div class="p-sub">Molded by heat into eco-friendly tableware</div>
+        </div>
+      -->
+         <div class="process-step">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><use href="#ic-drop"/></svg>
+          <span class="p-num">05</span>
+        </div>
+        <div class="p-lbl">Bagasse Pulp Product</div>
+        <div class="p-sub">Molded by heat into eco-friendly tableware</div>
+      </div> 
+
+
+
+        <span class="process-arrow"><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></span>
+        <!--
+        <div class="process-step">
+          <span class="p-num">06</span>
+          <div class="p-icon"><svg viewBox="0 0 24 24"><use href="#ic-sprout"/></svg></div>
+          <div class="p-lbl">Compost Heap</div>
+          <div class="p-sub">Returns to nature &amp; enriches the soil</div>
+        </div>
+      -->
+
+      <div class="process-step">
+        <div class="p-icon">
+          <svg viewBox="0 0 24 24"><use href="#ic-sprout"/></svg>
+          <span class="p-num">06</span>
+        </div>
+        <div class="p-lbl">Compost Heap</div>
+        <div class="p-sub">Returns to nature &amp; enriches the soil</div>
+      </div> 
+
+      </div>
+      <div class="process-cta reveal"><svg viewBox="0 0 24 24"><use href="#ic-recycle"/></svg> A cycle that nourishes the soil while protecting our world.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">green<span class="dot">•</span><em>gold</em></div>
+        <p class="footer-tagline">"Go Green, Go Bold with GreenGold" — premium sugarcane bagasse tableware, manufactured by SNG Eco India Pvt Ltd.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#manufacturing">Manufacturing</a></li>
+          <li><a href="index.html#export">Export</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="products.html#round-plates">Round Plates</a></li>
+          <li><a href="products.html#compartment-plates">Compartment Plates</a></li>
+          <li><a href="products.html#bowls">Bowls</a></li>
+          <li><a href="products.html#clamshell">Clamshell</a></li>
+          <li><a href="products.html#lids-glass">Lids &amp; Cups</a></li>
+          <li><a href="products.html#takeout">Takeout Containers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Corporate Office</h4>
+        <address>
+          1313–1314, 13th Floor, Fortune Business Hub,<br>
+          Nr. Shell Petrol Pump, Science City Road,<br>
+          Sola, Ahmedabad – 380060, Gujarat, India
+        </address>
+        <ul style="margin-top:16px;">
+          <li><a href="tel:+917990441625">+91 7990441625</a></li>
+          <li><a href="mailto:sales@sngecoindia.com">sales@sngecoindia.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SNG Eco India Pvt Ltd. All rights reserved.</span>
+      <div class="footer-marks">
+        <span>100% Compostable</span><span>Food-Grade</span><span>Plastic-Free</span><span>Export Ready</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="https://wa.me/917990441625?text=Hi%2C%20I%27m%20interested%20in%20GreenGold%20bagasse%20tableware" class="whatsapp-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="11" fill="#ffffff" opacity="0.15"/>
+    <path d="M7 17l0.9-3.2A6 6 0 1 1 10.8 17L7 17z" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M9.3 10.6c0 2.3 2 4.2 4.3 4.2" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
+  <span>Chat with us</span>
+</a>
+
+<script>
+  // Nav shrink on scroll
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  }, { passive:true });
+
+  // Split headline text into animated words
+  document.querySelectorAll('.split-title').forEach((el) => {
+    const text = el.textContent;
+    el.textContent = '';
+    text.split(/(\s+)/).forEach((piece, i) => {
+      if (piece.trim() === ''){ el.appendChild(document.createTextNode(piece)); return; }
+      const span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = piece;
+      span.style.transitionDelay = (i * 0.045) + 's';
+      el.appendChild(span);
+    });
+  });
+
+  // Reveal-on-scroll (also drives .split-title and .draw-line via shared 'in' class)
+  const revealEls = document.querySelectorAll('.reveal, .split-title, .zoom-wrap, .draw-line');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach((el) => io.observe(el));
+
+  // Gentle parallax on hero visual panels
+  const parallaxEls = document.querySelectorAll('.parallax');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && parallaxEls.length){
+    let ticking = false;
+    const updateParallax = () => {
+      const vh = window.innerHeight;
+      parallaxEls.forEach((el) => {
+        const speed = parseFloat(el.dataset.speed || '0.05');
+        const rect = el.getBoundingClientRect();
+        const offset = (rect.top + rect.height/2 - vh/2) * speed;
+        el.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking){ window.requestAnimationFrame(updateParallax); ticking = true; }
+    }, { passive:true });
+    updateParallax();
+  }
+
+  // Count-up numbers when they scroll into view
+  const countEls = document.querySelectorAll('.count');
+  const formatNum = (n, format) => format === 'comma' ? Math.round(n).toLocaleString('en-IN') : Math.round(n);
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target || '0');
+      const format = el.dataset.format || '';
+      const duration = 1400;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = formatNum(target * eased, format);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      if (reduceMotion){ el.textContent = formatNum(target, format); }
+      else { requestAnimationFrame(step); }
+      countIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach((el) => countIO.observe(el));
+
+  // Subtle 3D tilt on hover for cards
+  if (!reduceMotion){
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        const lift = card.classList.contains('highlight') ? -18 : -8;
+        card.style.transform = `perspective(700px) rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*7).toFixed(2)}deg) translateY(${lift}px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  // Vision/mission dot indicator auto-cycle
+  const dots = document.querySelectorAll('.vm-dots span');
+  if (dots.length){
+    let di = 0;
+    setInterval(() => {
+      dots.forEach(d => d.classList.remove('active'));
+      di = (di + 1) % dots.length;
+      dots[di].classList.add('active');
+    }, 2600);
+  }
+
+  
+</script>
+
+</body>
+</html>
